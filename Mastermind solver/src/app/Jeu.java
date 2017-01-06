@@ -1,5 +1,9 @@
 package app;
-
+/**
+ * Jeu en tant que tel
+ * @author Jean-Christophr Bourgault
+ * @version 1.0
+ */
 import java.util.Scanner;
 
 public class Jeu {
@@ -11,11 +15,11 @@ public class Jeu {
 	public void jouer() {
 		initVars();
 		System.out.println("Jouons au Mastermind!");
-		System.out.println("Choisis une combinaison de " + liste.largeurGuess + " couleurs...");
+		System.out.println("Choisis une combinaison de " + liste.LARGEUR_GUESS + " couleurs...");
 		System.out.println("(gardes-la dans ta tête ou notes-la, mais pas besoin de me l'écrire ;) )");
 		String couleurs = "";
-		for (int i = 0; i < liste.couleursPossibles.length; i++) {
-			couleurs += liste.couleursPossibles[i] + " ";
+		for (int i = 0; i < liste.COULEURS_POSSIBLES.length; i++) {
+			couleurs += liste.COULEURS_POSSIBLES[i] + " ";
 		}
 		System.out.println("Les couleurs permises sont:");
 		System.out.println(couleurs);
@@ -30,7 +34,7 @@ public class Jeu {
 			res[0] = sc.nextInt();
 			System.out.println("Et combien de noirs? (un noir est une couleur bonne, mais à la mauvaise place)");
 			res[1] = sc.nextInt();
-			if (res[0] == liste.largeurGuess) {
+			if (res[0] == liste.LARGEUR_GUESS) {
 				victoire = true;
 				System.out.println("Haha! J'ai gagné en " + tour + " tours!");
 			} else {

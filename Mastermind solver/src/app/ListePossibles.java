@@ -1,12 +1,16 @@
 package app;
-
+/**
+ * Pour gérer la liste des possibilités
+ * @author Jean-Christophr Bourgault
+ * @version 1.0
+ */
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ListePossibles {
-	public final int largeurGuess = 4;
-	public final String[] couleursPossibles = { "blanc", "rose", "jaune", "vert", "rouge", "bleu" };
+	public final int LARGEUR_GUESS = 4;
+	public final String[] COULEURS_POSSIBLES = { "blanc", "rose", "jaune", "vert", "rouge", "bleu" };
 
 	public ArrayList<String[]> combinaisonsPossibles = null;
 	public String[] currentGuess;
@@ -18,22 +22,22 @@ public class ListePossibles {
 	private void initialiserTout() {
 		// combinaisonsPossibles
 		combinaisonsPossibles = new ArrayList<String[]>();
-		int[] compteurs = new int[largeurGuess];
+		int[] compteurs = new int[LARGEUR_GUESS];
 		for (int i = 0; i < compteurs.length; i++) {
 			compteurs[i] = 0;
 		}
 		boolean fini = false;
 		while (!fini) {
-			String[] comb = new String[largeurGuess];
+			String[] comb = new String[LARGEUR_GUESS];
 			for (int i = 0; i < compteurs.length; i++) {
-				comb[i] = couleursPossibles[compteurs[i]];
+				comb[i] = COULEURS_POSSIBLES[compteurs[i]];
 			}
 			combinaisonsPossibles.add(comb);
 			boolean comptage = true;
 			int ajusteur = compteurs.length - 1;
 			while (comptage) {
 				compteurs[ajusteur]++;
-				if (compteurs[ajusteur] >= couleursPossibles.length) {
+				if (compteurs[ajusteur] >= COULEURS_POSSIBLES.length) {
 					compteurs[ajusteur] = 0;
 					ajusteur--;
 					if (ajusteur == -1) {
@@ -46,13 +50,13 @@ public class ListePossibles {
 			}
 		}
 		// currentGuess
-		currentGuess = new String[largeurGuess];
+		currentGuess = new String[LARGEUR_GUESS];
 	}
 
 	public String choisirGuess() {
 		String choix = "";
 		int choixIndex = -1;
-		int plusPetitHitCount = (int) Math.pow(couleursPossibles.length, largeurGuess);
+		int plusPetitHitCount = (int) Math.pow(COULEURS_POSSIBLES.length, LARGEUR_GUESS);
 		int[] hitCounts = faireHitCounts();
 		for (int i = 0; i < hitCounts.length; i++) {
 			if (hitCounts[i] < plusPetitHitCount) {
@@ -78,7 +82,7 @@ public class ListePossibles {
 	}
 
 	public int hitCountIndiv(String[] comb) {
-		int[][] tableau = new int[largeurGuess + 1][largeurGuess + 1];
+		int[][] tableau = new int[LARGEUR_GUESS + 1][LARGEUR_GUESS + 1];
 		int hitCount = 0;
 		for (int i = 0; i < combinaisonsPossibles.size(); i++) {
 			int[] res = trouverResultat(comb, combinaisonsPossibles.get(i));
@@ -102,8 +106,8 @@ public class ListePossibles {
 		// Une combinaison gagnante c'est [4, 0]
 		int[] res = { 0, 0 };
 		// Setup
-		boolean[] matched1 = new boolean[largeurGuess];
-		boolean[] matched2 = new boolean[largeurGuess];
+		boolean[] matched1 = new boolean[LARGEUR_GUESS];
+		boolean[] matched2 = new boolean[LARGEUR_GUESS];
 		for (int i = 0; i < matched1.length; i++) {
 			matched1[i] = false;
 		}
